@@ -20,16 +20,13 @@ convertSPS <- function(event_vec){
 #-----------------------------------------------------------------------------
 #function: construct event vector to simple SPS vector
 #param: event_vec, characterVector
-#aaaabbbccd
-#a,b,c,d
+#aaaabbbccd -> a,b,c,d
 #-----------------------------------------------------------------------------
 convertSimpleSPS <- function(event_vec){
   event_sps <- rle(event_vec)$values
   return(event_sps)
 }
 
-#construct event replace vector
-#a1,a2,a3....z1,z2,z3
 #-----------------------------------------------------------------------------
 #function: generating combination both letters and digits
 #param: no
@@ -41,4 +38,13 @@ constructEventReplace <- function(){
   event_combine <- expand.grid(event_numbers,event_letters)
   event_replaces <- sprintf('%s%s',event_combine[,2],event_combine[,1])
   return(event_replaces)
+}
+
+#-----------------------------------------------------------------------------
+#function: suffix array
+#param: string, characters
+#abcd <- "abcd" "bcd"  "cd"   "d"
+#-----------------------------------------------------------------------------
+constructSuffixArray <- function(string){
+  str_sub(string,seq(nchar(string))) %>% sort()
 }
